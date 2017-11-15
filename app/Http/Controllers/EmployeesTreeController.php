@@ -14,7 +14,7 @@ class EmployeesTreeController extends Controller
      */
     public function index()
     {
-        //
+        //Проблемы выбранной структуры БД: кол-во join'ов, ресурсоемкость, фиксированое кол-во уровней, сложные операции с кусками веток. Принято решение перейти на иерархическую структуру смежных вершин (Adjacency List) в ветке v2.0
         $tree = DB::table('employees_tree AS et')
             ->select(
                         'e1.first_name AS lvl_1',
