@@ -14,25 +14,13 @@ class EmployeesTreeController extends Controller
      */
     public function index()
     {
-        //Проблемы выбранной структуры БД: кол-во join'ов, ресурсоемкость, фиксированое кол-во уровней, сложные операции с кусками веток. Принято решение перейти на иерархическую структуру смежных вершин (Adjacency List) в ветке v2.0
-        $tree = DB::table('employees_tree AS et')
-            ->select(
-                        'e1.first_name AS lvl_1',
-                        'e2.first_name AS lvl_2',
-                        'e3.first_name AS lvl_3',
-                        'e4.first_name AS lvl_4',
-                        'e5.first_name AS lvl_5',
-                        'e6.first_name AS lvl_6',
-                        'e7.first_name AS lvl_7'
-                    )
-                ->leftJoin('employees as e1', 'e1.id', '=', 'et.emp_id_lvl_1')
-                ->leftJoin('employees as e2', 'e2.id', '=', 'et.emp_id_lvl_2')
-                ->leftJoin('employees as e3', 'e3.id', '=', 'et.emp_id_lvl_3')
-                ->leftJoin('employees as e4', 'e4.id', '=', 'et.emp_id_lvl_4')
-                ->leftJoin('employees as e5', 'e5.id', '=', 'et.emp_id_lvl_5')
-                ->leftJoin('employees as e6', 'e6.id', '=', 'et.emp_id_lvl_6')
-                ->leftJoin('employees as e7', 'e7.id', '=', 'et.emp_id_lvl_7')
-            ->get();
+
+        //
+        $tree = [
+                    ['foo' => 'bar'],
+                    ['foo' => 'bar'],
+                    ['foo' => 'bar']
+                ];
 
         return view('employees_tree', compact('tree'));
 

@@ -25,42 +25,66 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 */
+//Определение базовой фабрики
 $factory->define(App\Employee::class, function (Faker\Generator $faker) {
    
     return [
+        'parent_id' => random_int(1, pow(6,0) + pow(6,1) + pow(6,2) + pow(6,3) + pow(6,4) + pow(6,5) + pow(6,6)),
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'patronomic' => $faker->firstName,
-        'position_id' => 7,	//random_int(1, 7),
-		'employmend_date' => date('Y-m-d'),
+        'position' => $faker->jobTitle,
+		'employment_date' => date('Y-m-d'),
         'salary' => random_int(5000, 10000)
     ];
 });
 
-$factory->state(App\Employee::class, 'worker', function ($faker) { 
- 	return [ 'position_id' => 7, 'salary' => random_int(10000, 40000), ]; 
-}); 
-
-$factory->state(App\Employee::class, 'head_of_the_sector', function ($faker) { 
- 	return [ 'position_id' => 6, 'salary' => random_int(40000, 50000), ]; 
-}); 
-
-$factory->state(App\Employee::class, 'deputy_chief', function ($faker) { 
- 	return [ 'position_id' => 5, 'salary' => random_int(50000, 60000), ]; 
-}); 
-
-$factory->state(App\Employee::class, 'chief', function ($faker) { 
- 	return [ 'position_id' => 4, 'salary' => random_int(60000, 80000), ]; 
-}); 
-
-$factory->state(App\Employee::class, 'vice_president', function ($faker) { 
- 	return [ 'position_id' => 3, 'salary' => random_int(80000, 200000), ]; 
+//Определение фабрик и состояний для каждой должности
+$factory->state(App\Employee::class, 'CEO', function ($faker) { 
+ 	return [ 
+            'parent_id' => NULL, 
+            'position' => 'CEO', 
+            'salary' => 1000000, ]; 
 }); 
 
 $factory->state(App\Employee::class, 'director', function ($faker) { 
- 	return [ 'position_id' => 2, 'salary' => random_int(200000, 300000), ]; 
+    return [ 
+            'parent_id' => 1, 
+            'position' => 'director', 
+            'salary' => random_int(200000, 300000), ]; 
 }); 
 
-$factory->state(App\Employee::class, 'CEO', function ($faker) { 
- 	return [ 'position_id' => 1, 'salary' => 1000000, ]; 
+$factory->state(App\Employee::class, 'vice_president', function ($faker) { 
+    return [ 
+            'parent_id' => random_int(2, 1+pow(6,1)), 
+            'position' => 'vice_president', 
+            'salary' => random_int(80000, 200000), ]; 
+}); 
+
+$factory->state(App\Employee::class, 'chief', function ($faker) { 
+    return [ 
+            'parent_id' => random_int(pow(6,1)+2, 1+pow(6,2)), 
+            'position' => 'chief', 
+            'salary' => random_int(60000, 80000), ]; 
+}); 
+
+$factory->state(App\Employee::class, 'deputy_chief', function ($faker) { 
+    return [ 
+            'parent_id' => random_int(pow(6,2)+2, 1+pow(6,3)), 
+            'position' => 'deputy_chief', 
+            'salary' => random_int(50000, 60000), ]; 
+}); 
+
+$factory->state(App\Employee::class, 'head_of_the_sector', function ($faker) { 
+    return [ 
+            'parent_id' => random_int(pow(6,3)+2, 1+pow(6,4)), 
+            'position' => 'head_of_the_sector', 
+            'salary' => random_int(40000, 50000), ]; 
+}); 
+
+$factory->state(App\Employee::class, 'worker', function ($faker) { 
+    return [ 
+            'parent_id' => random_int(pow(6,4)+2, 1+pow(6,5)), 
+            'position' => 'worker', 
+            'salary' => random_int(10000, 40000), ]; 
 }); 

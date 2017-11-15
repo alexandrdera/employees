@@ -11,7 +11,7 @@ class EmployeesTableSeeder extends Seeder
      */
     public function run()
     {
-        //Запускаем фабрики на заполнение БД сотрудниками всех должностей
+        //Запускаем фабрики на заполнение БД сотрудниками всех должностей заданного кол-ва
 
         factory(App\Employee::class, 1)->states('CEO')->create();
 
@@ -27,41 +27,5 @@ class EmployeesTableSeeder extends Seeder
 
         factory(App\Employee::class, pow(6,6))->states('worker')->create();
 
-
-        /**
-        //Заполнение таблицы Employees без использования фабрик
-        DB::table('employees')->insert(
-            array(
-                
-                [
-                    'first_name' => "Александр",
-                    'last_name' => "Дерачиц",
-                    'patronomic' => "Игоревич",
-                    'position_id' => 1,
-                    'employmend_date' => date('Y-m-d'),
-                    'salary' => 30000,
-                    'created_at' => date('Y-m-d H:i:s')
-                ]
-                )
-            );
- 
-        $x=0;
-        while ($x<pow(6,6))
-        {
-            DB::table('employees')->insert(
-                array(
-                    [
-                        'first_name' => str_random(5),
-                        'last_name' => str_random(7),
-                        'patronomic' => str_random(10),
-                        'position_id' => 6,
-                        'employmend_date' => date('Y-m-d'),
-                        'salary' => random_int(5000, 10000),
-                        'created_at' => date('Y-m-d H:i:s')
-                    ]
-                    )
-                );
-            $x++;
-        }*/
     }
 }
