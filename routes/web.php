@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Маршрутизатор дерева сотрудников
+Route::get('/employees_tree', 'EmployeesTreeController@index');
