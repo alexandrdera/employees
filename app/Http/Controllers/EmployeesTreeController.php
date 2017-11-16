@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+ini_set('max_execution_time', 300); //Увеличиваем минимально разрешенное время выполнения php скрипта
 
 class EmployeesTreeController extends Controller
 {
@@ -16,13 +17,17 @@ class EmployeesTreeController extends Controller
     {
 
         //
-        $tree = [
-                    ['foo' => 'bar'],
-                    ['foo' => 'bar'],
-                    ['foo' => 'bar']
-                ];
-
-        return view('employees_tree', compact('tree'));
+        $employees = DB::table('employees AS e')
+            ->select(
+                        'e.id',
+                        'e.parent_id',
+                        'e.position',
+                        'e.first_name',
+                        'e.last_name',
+                        'e.salary'
+                    )
+            ->get();
+        return view('employees_tree', compact('employees'));
 
     }
 
