@@ -19,7 +19,7 @@ function EmployeesTree($array, $parent_id, $level) {
             $level++;
             echo '<ul>';
 
-            if ($level < 7) {
+            if ($level < 3) {
                 EmployeesTree($array, $employee->id, $level);
             }
 

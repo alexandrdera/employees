@@ -13,7 +13,7 @@
         <a class="nav-link" href="/employees_tree">Tree</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Employees</a>
+        <a class="nav-link" href="/employees">Employees</a>
       </li>
       </li>
     </ul>
