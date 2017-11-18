@@ -15,11 +15,10 @@ Route::get('/', function () {
     return view('index');
 });
 
-//Маршрутизатор дерева сотрудников
 Route::get('/employees_tree', 'EmployeesTreeController@index');
 
-//Маршрутизатор сотрудников
 Route::get('/employees', 'EmployeeController@index');
 
-//Маршрутизатор сотрудников
 Route::get('/employees/{sort_by}', 'EmployeeController@index');
+
+Route::get('employees_search', ['as' => 'search_var', 'uses' => 'EmployeeController@search']);
