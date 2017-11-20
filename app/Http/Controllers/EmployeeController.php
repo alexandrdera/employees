@@ -14,6 +14,10 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(Request $request, $sort_by=null)
     { 
@@ -48,33 +52,37 @@ class EmployeeController extends Controller
 
         $search = Input::get('search_var');
 
-        $employees = DB::table('employees AS e')
-            ->select(
-                        'e.id',
-                        'e.position',
-                        'e.first_name',
-                        'e.last_name',
-                        'e.patronomic',
-                        'e.employment_date',
-                        'e.salary',
-                        'e2.first_name as chief_name',
-                        'e2.last_name as chief_last_name',
-                        'e2.position as chief_position'
-                    )
-            ->leftjoin('employees AS e2', 'e2.id', '=' , 'e.parent_id')
-            ->where('e.id', '=', ''.$search.'')
-            ->orwhere('e.position', '=', ''.$search.'')
-            ->orwhere('e.first_name', '=', ''.$search.'')
-            ->orwhere('e.last_name', '=', ''.$search.'')
-            ->orwhere('e.patronomic', '=', ''.$search.'')
-            ->orwhere('e.employment_date', '=', ''.$search.'')
-            ->orwhere('e.salary', '=', ''.$search.'')
-            ->orwhere('e2.first_name', '=', ''.$search.'')
-            ->orwhere('e2.last_name', '=', ''.$search.'')
-            ->orwhere('e2.position', '=', ''.$search.'')
-            ->paginate(100);
-
-        return view('employee', compact('employees'));        
+        if (is_null($search)) {
+            return redirect('/employees');
+        } else { 
+            $employees = DB::table('employees AS e')
+                ->select(
+                            'e.id',
+                            'e.position',
+                            'e.first_name',
+                            'e.last_name',
+                            'e.patronomic',
+                            'e.employment_date',
+                            'e.salary',
+                            'e2.first_name as chief_name',
+                            'e2.last_name as chief_last_name',
+                            'e2.position as chief_position'
+                        )
+                ->leftjoin('employees AS e2', 'e2.id', '=' , 'e.parent_id')
+                ->where('e.id', '=', ''.$search.'')
+                ->orwhere('e.position', '=', ''.$search.'')
+                ->orwhere('e.first_name', '=', ''.$search.'')
+                ->orwhere('e.last_name', '=', ''.$search.'')
+                ->orwhere('e.patronomic', '=', ''.$search.'')
+                ->orwhere('e.employment_date', '=', ''.$search.'')
+                ->orwhere('e.salary', '=', ''.$search.'')
+                ->orwhere('e2.first_name', '=', ''.$search.'')
+                ->orwhere('e2.last_name', '=', ''.$search.'')
+                ->orwhere('e2.position', '=', ''.$search.'')
+                ->paginate(100);
+    
+            return view('employee', compact('employees'));        
+        }
     }
     /**
      * Show the form for creating a new resource.
