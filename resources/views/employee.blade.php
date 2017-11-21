@@ -4,12 +4,12 @@
     
 <h2>Employee...</h2>
 
-{{ Form::open(['route' => 'search_var', 'method' => 'GET']) }}
+{!! Form::open(['route' => 'search_var', 'method' => 'GET']) !!}
 	<div class="form-group">
-		{{ Form::text('search_var', null, ['class' => '', 'placeholder' => 'Search'])}}
-		{{ Form::submit('Search') }}
+		{!! Form::text('search_var', null, ['class' => '', 'placeholder' => 'Search']) !!}
+		{!! Form::submit('Search') !!}
 	</div>
-{{ Form::close() }}
+{!! Form::close() !!}
 
 <table class="table table-striped table-bordered table-sm">
 	<caption>List of employees {{ $employees->links() }}</caption>
