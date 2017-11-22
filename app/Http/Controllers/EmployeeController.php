@@ -92,6 +92,8 @@ class EmployeeController extends Controller
     public function create()
     {
         //
+        $employee = new Employee();
+        return dd($employee);
     }
 
     /**

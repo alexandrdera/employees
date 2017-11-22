@@ -15,16 +15,16 @@
 	<caption>List of employees {{ $employees->links() }}</caption>
 	<thead class="table-dark">
 		<tr>
-			<th><a href="/employees/id">ID</a></th>
-			<th><a href="/employees/first_name">Name</a></th>
-			<th><a href="/employees/last_name">Last name</a></th>
-			<th><a href="/employees/patronomic">Patronomic</a></th>
-			<th><a href="/employees/position">Position</a></th>
-			<th><a href="/employees/employment_date">Employment date</a></th>
-			<th><a href="/employees/salary">Salary</a></th>
-			<th><a href="/employees/chief_name">Chief name</a></th>
-			<th><a href="/employees/chief_last_name">Chief last name</a></th>
-			<th><a href="/employees/chief_position">Chief position</a></th>
+			<th><a href="/employees/order_by/id">ID</a></th>
+			<th><a href="/employees/order_by/first_name">Name</a></th>
+			<th><a href="/employees/order_by/last_name">Last name</a></th>
+			<th><a href="/employees/order_by/patronomic">Patronomic</a></th>
+			<th><a href="/employees/order_by/position">Position</a></th>
+			<th><a href="/employees/order_by/employment_date">Employment date</a></th>
+			<th><a href="/employees/order_by/salary">Salary</a></th>
+			<th><a href="/employees/order_by/chief_name">Chief name</a></th>
+			<th><a href="/employees/order_by/chief_last_name">Chief last name</a></th>
+			<th><a href="/employees/order_by/chief_position">Chief position</a></th>
 		</tr>
 	</thead>
 	<tbody>

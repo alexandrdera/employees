@@ -17,11 +17,11 @@ Route::get('/', function () {
 
 Route::get('/employees_tree', 'EmployeesTreeController@index');
 
-Route::get('/employees', 'EmployeeController@index');
+Route::resource('/employees', 'EmployeeController');
 
-Route::get('employees/search', ['as' => 'search_var', 'uses' => 'EmployeeController@search']);
+Route::get('employees/search/search', ['as' => 'search_var', 'uses' => 'EmployeeController@search']);
 
-Route::get('/employees/{sort_by}', 'EmployeeController@index');
+Route::get('/employees/order_by/{sort_by}', 'EmployeeController@index');
 
 Auth::routes();
 
