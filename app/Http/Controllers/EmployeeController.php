@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Input;
@@ -92,8 +93,7 @@ class EmployeeController extends Controller
     public function create()
     {
         //
-        $employee = new Employee();
-        return dd($employee);
+        return view('admin.pages.create');
     }
 
     /**
@@ -105,6 +105,31 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'parent_id' => 'required',
+            'position' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'patronomic' => 'required',
+            'employment_date' => 'required',
+            'salary' => 'required',
+        ]);
+
+        $employee = new Employee();
+        $employee->parent_id = $request->parent_id;
+        $employee->position = $request->position;
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->patronomic = $request->patronomic;
+        $employee->employment_date = $request->employment_date;
+        $employee->salary = $request->salary;
+        
+        $employee->save();
+        
+        $request->session()->flash('message', 'Employee was created!');
+
+        return redirect()->route('employees.show', $employee->id);
+        
     }
 
     /**
@@ -116,6 +141,16 @@ class EmployeeController extends Controller
     public function show($id)
     {
         //
+        $employee = Employee::find($id);
+
+        // Проверка на наличие начальника
+        if ($employee->parent_id <> null){
+            $chief = Employee::find($employee->parent_id);    
+        } else {
+            $chief = null;
+        }
+
+        return view('admin.pages.show', compact('employee', 'chief'));
     }
 
     /**
@@ -127,6 +162,18 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         //
+        $employee = Employee::find($id);
+
+        // Проверка на наличие начальника
+        if ($employee->parent_id <> null){
+            $chief = Employee::find($employee->parent_id);    
+        } else {
+            $chief = null;
+        }        
+
+        $employee = compact('employee', 'chief');
+        //return dd($employee);
+        return view('admin.pages.edit', $employee);
     }
 
     /**
@@ -139,6 +186,31 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'parent_id' => 'required',
+            'position' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'patronomic' => 'required',
+            'employment_date' => 'required',
+            'salary' => 'required',
+        ]);
+
+        $employee = Employee::find($id);
+        $employee->parent_id = $request->parent_id;
+        $employee->position = $request->position;
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->patronomic = $request->patronomic;
+        $employee->employment_date = $request->employment_date;
+        $employee->salary = $request->salary;
+        
+        $employee->save();
+        
+        $request->session()->flash('message', 'Employee was updated!');
+
+        return redirect()->route('employees.show', $employee->id);
+
     }
 
     /**
@@ -150,5 +222,10 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+        $employee = Employee::find($id);
+        $employee->delete();     
+        
+        return redirect()->route('employees.index');
+
     }
 }

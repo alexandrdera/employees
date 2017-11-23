@@ -23,6 +23,7 @@
   </div>
 
   <div class="container">
+    @include('admin.parts.msg')
     @yield('content') 
   </div>
 

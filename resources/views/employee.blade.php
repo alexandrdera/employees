@@ -4,12 +4,19 @@
     
 <h2>Employee...</h2>
 
-{!! Form::open(['route' => 'search_var', 'method' => 'GET']) !!}
-	<div class="form-group">
-		{!! Form::text('search_var', null, ['class' => '', 'placeholder' => 'Search']) !!}
-		{!! Form::submit('Search') !!}
+<div class="row">
+	<div class="col-auto mr-auto">
+		<a class="btn btn-outline-success btn-sm" href="/employees/create">Create New</a>
 	</div>
-{!! Form::close() !!}
+	<div class="col-auto">
+		{!! Form::open(['route' => 'search_var', 'method' => 'GET']) !!}
+			<div class="form-group">
+				{!! Form::text('search_var', null, ['class' => '', 'placeholder' => 'Search']) !!}
+				{!! Form::submit('Search', ['class' => 'btn btn-outline-info btn-sm']) !!}
+			</div>
+		{!! Form::close() !!}
+	</div>
+</div>
 
 <table class="table table-striped table-bordered table-sm">
 	<caption>List of employees {{ $employees->links() }}</caption>
@@ -25,6 +32,7 @@
 			<th><a href="/employees/order_by/chief_name">Chief name</a></th>
 			<th><a href="/employees/order_by/chief_last_name">Chief last name</a></th>
 			<th><a href="/employees/order_by/chief_position">Chief position</a></th>
+			<th>Action</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -40,6 +48,10 @@
 			<td>{{ $employee->chief_name }}</td>
 			<td>{{ $employee->chief_last_name }}</td>
 			<td>{{ $employee->chief_position }}</td>
+			<td>
+				<a href="/employees/{{ $employee->id }}">Read</a>
+				<a href="{{ URL::to('/employees/' . $employee->id) .'/edit' }}">Edit</a>
+			</td>
 	    </tr>    			
 	@endforeach
 	</tbody>
