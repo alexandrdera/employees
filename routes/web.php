@@ -26,3 +26,8 @@ Route::get('/employees/order_by/{sort_by}', 'EmployeeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Тест работы ajax
+Route::get('/getRequest', function(){
+	return "getRequest удачно загружен2";
+});

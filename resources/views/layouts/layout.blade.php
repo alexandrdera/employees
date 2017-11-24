@@ -35,5 +35,26 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+ 
+    <!-- //Тест работы ajax --> 
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('#getRequest').click(function(){
+          // $.get('getRequest', function(data){
+          //   $('#getRequestData').append(data);
+          //   console.log(data);
+          // });
+          $.ajax({
+            type: "GET",
+            url: "getRequest",
+            success: function(data){
+              console.log(data);
+              $('#getRequestData').append(data);
+            }
+          });
+        });
+      });
+    </script>
+
 </body>
 </html>
