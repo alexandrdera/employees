@@ -6,9 +6,9 @@
 
     <!-- //Тест работы ajax -->
     <button class="btn btn-warning" id="getRequest">getRequest</button>
-	<div id="getRequestData2">
+	<div id="getRequestData">
 		sametext
 	</div>
-	
+
 </div>
 @endsection
