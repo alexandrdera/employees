@@ -219,14 +219,19 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
-        $employee = Employee::find($id);
-        $employee->delete();     
-        
-        return redirect()->route('employees.index');
-
+        if ($id <> null){
+            $employee = Employee::find($id);
+            $employee->delete();        
+            return redirect()->route('employees.index');            
+        } else {
+            $employee = Employee::find($request->id);
+            $employee->delete();     
+            $data = "сотрудник удален3: ".$request->id;
+            return response()->json( $data );            
+        }
     }
 
     public function getRequest(Request $req){

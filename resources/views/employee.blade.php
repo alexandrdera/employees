@@ -53,7 +53,7 @@
 				<a href="{{ URL::to('/employees/' . $employee->id) .'/edit' }}">Edit</a>
 				<form>
 
-					<button type="submit" class="btn btn-primary" id={{$employee->id}} name="delete">Delete</button>
+					<button type="submit" class="btn btn-danger" id="{{$employee->id}}">Delete</button>
 				</form>
 			</td>
 	    </tr>    			

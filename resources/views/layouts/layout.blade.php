@@ -40,7 +40,8 @@
     <!-- //Тест работы ajax --> 
     <script type="text/javascript">
       $(document).ready(function(){
-        $('#getRequest').click(function(){
+        $('#getRequest').click(function(e){
+          e.preventDefault();
           // $.get('getRequest', function(data){
           //   $('#getRequestData').append(data);
           //   console.log(data);
@@ -50,7 +51,7 @@
             url: "getRequest",
             success: function(data){
               console.log(data);
-              $('#getRequestData').remove();
+              $('#getRequestData').append("test");
             }
           });
         });
@@ -63,20 +64,20 @@
         });
 
         // Обработка кнопки Delete удаления сотрудника
-        $('button[name="delete"]').click(function(){
-          
+        $('.btn-danger').click(function(e){
+          e.preventDefault();
           console.log($(this).attr("id"));
           
           $.ajax({
-            type: "post",
-            url: "/employees/delete/",
+            type: "DELETE",
+            url: "/employees/"+$(this).attr("id"),
             data: {
               'id': $(this).attr("id"), 
               '_token': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data){
               console.log(data);
-              $(this).remove();
+              $(this).append("test");
             }
           });
         });
