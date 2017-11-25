@@ -4,6 +4,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{!! csrf_token() !!}" />
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -49,10 +50,38 @@
             url: "getRequest",
             success: function(data){
               console.log(data);
-              $('#getRequestData').append(data);
+              $('#getRequestData').remove();
             }
           });
         });
+
+        // После создания тега meta вы можете указать библиотеке, такой как jQuery, автоматически добавлять токен в заголовки всех запросов. Это обеспечивает простую, удобную CSRF-защиту для ваших приложений на базе AJAX:
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // Обработка кнопки Delete удаления сотрудника
+        $('button[name="delete"]').click(function(){
+          
+          console.log($(this).attr("id"));
+          
+          $.ajax({
+            type: "post",
+            url: "/employees/delete/",
+            data: {
+              'id': $(this).attr("id"), 
+              '_token': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+              console.log(data);
+              $(this).remove();
+            }
+          });
+        });
+
+
       });
     </script>
 

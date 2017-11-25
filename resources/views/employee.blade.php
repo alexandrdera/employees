@@ -51,6 +51,10 @@
 			<td>
 				<a href="/employees/{{ $employee->id }}">Read</a>
 				<a href="{{ URL::to('/employees/' . $employee->id) .'/edit' }}">Edit</a>
+				<form>
+
+					<button type="submit" class="btn btn-primary" id={{$employee->id}} name="delete">Delete</button>
+				</form>
 			</td>
 	    </tr>    			
 	@endforeach

@@ -28,6 +28,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Тест работы ajax
-Route::get('/getRequest', function(){
-	return "getRequest удачно загружен2";
-});
+Route::get('/getRequest', 'EmployeeController@getRequest');
+Route::post('/employees/delete/', 'EmployeeController@delete_e');

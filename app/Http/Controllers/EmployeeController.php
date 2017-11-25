@@ -228,4 +228,17 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index');
 
     }
+
+    public function getRequest(Request $req){
+        //return "test";
+        $data = "test2";
+        return response()->json( $data );
+    }
+
+    public function delete_e(Request $request){
+        $employee = Employee::find($request->id);
+        $employee->delete();     
+        $data = "сотрудник удален3: ".$request->id;
+        return response()->json( $data );
+    }
 }
