@@ -23,6 +23,7 @@
 	<thead class="table-dark">
 		<tr>
 			<th><a href="/employees/order_by/id">ID</a></th>
+			<th>Thumb</th>
 			<th><a href="/employees/order_by/first_name">Name</a></th>
 			<th><a href="/employees/order_by/last_name">Last name</a></th>
 			<th><a href="/employees/order_by/patronomic">Patronomic</a></th>
@@ -39,6 +40,7 @@
     @foreach ($employees as $employee)
 	    <tr>
 			<th scope="row">{{ $employee->id }}</th>
+			<td><img src={{ '/'.$employee->thumb }}></td>
 			<td>{{ $employee->first_name }}</td>
 			<td>{{ $employee->last_name }}</td>
 			<td>{{ $employee->patronomic }}</td>
@@ -48,7 +50,7 @@
 			<td>{{ $employee->chief_name }}</td>
 			<td>{{ $employee->chief_last_name }}</td>
 			<td>{{ $employee->chief_position }}</td>
-			<td>
+			<td class="action_column">
 				<a href="/employees/{{ $employee->id }}" class="btn btn-outline-secondary btn-sm">
 					<img src="/open-iconic/svg/person.svg" alt="person">
 				</a>

@@ -171,6 +171,9 @@ return [
         //Для запуска класса Form
         Collective\Html\HtmlServiceProvider::class,
 
+        // Для работы с изображениями
+        Intervention\Image\ImageServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -232,6 +235,9 @@ return [
         //Для запуска класса Form
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+
+        // Для работы с изображениями
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

@@ -6,6 +6,7 @@ use App\Employee;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Input;
+use Intervention\Image\Facades\Image as ImageInt;
 
 class EmployeeController extends Controller
 {
@@ -37,6 +38,7 @@ class EmployeeController extends Controller
                         'e.patronomic',
                         'e.employment_date',
                         'e.salary',
+                        'e.thumb',
                         'e2.first_name as chief_name',
                         'e2.last_name as chief_last_name',
                         'e2.position as chief_position'
@@ -105,7 +107,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
+         $this->validate($request, [
             'parent_id' => 'required',
             'position' => 'required',
             'first_name' => 'required',
@@ -113,8 +115,11 @@ class EmployeeController extends Controller
             'patronomic' => 'required',
             'employment_date' => 'required',
             'salary' => 'required',
+            'photo' => 'image|dimensions:max_width=500,max_height=500',
+
         ]);
 
+        // Создание сотрудника
         $employee = new Employee();
         $employee->parent_id = $request->parent_id;
         $employee->position = $request->position;
@@ -123,6 +128,22 @@ class EmployeeController extends Controller
         $employee->patronomic = $request->patronomic;
         $employee->employment_date = $request->employment_date;
         $employee->salary = $request->salary;
+
+        // Подготовка изображений сотрудника
+        $file = $request->file('photo');
+        if ($file<>null) {
+            $imagePath = 'upload/photo/';
+            $thumbPath = 'upload/thumb/';
+
+            $filename = str_random(20) .'.' . $file->getClientOriginalExtension() ?: 'png';
+            $img = ImageInt::make($file);
+
+            $img->resize(200,200)->save($imagePath . $filename);
+            $img->resize(75,75)->save($thumbPath . $filename);
+    
+            $employee->photo = $imagePath . $filename;
+            $employee->thumb = $thumbPath . $filename;
+        }
         
         $employee->save();
         
@@ -172,7 +193,7 @@ class EmployeeController extends Controller
         }        
 
         $employee = compact('employee', 'chief');
-        //return dd($employee);
+        
         return view('admin.pages.edit', $employee);
     }
 
@@ -194,9 +215,12 @@ class EmployeeController extends Controller
             'patronomic' => 'required',
             'employment_date' => 'required',
             'salary' => 'required',
+            'photo' => 'image|dimensions:max_width=500,max_height=500',
+
         ]);
 
-        $employee = Employee::find($id);
+        // Создание сотрудника
+        $employee = new Employee();
         $employee->parent_id = $request->parent_id;
         $employee->position = $request->position;
         $employee->first_name = $request->first_name;
@@ -204,7 +228,23 @@ class EmployeeController extends Controller
         $employee->patronomic = $request->patronomic;
         $employee->employment_date = $request->employment_date;
         $employee->salary = $request->salary;
-        
+
+        // Подготовка изображений сотрудника
+        $file = $request->file('photo');
+        if ($file<>null) {
+            $imagePath = 'upload/photo/';
+            $thumbPath = 'upload/thumb/';
+
+            $filename = str_random(20) .'.' . $file->getClientOriginalExtension() ?: 'png';
+            $img = ImageInt::make($file);
+
+            $img->resize(200,200)->save($imagePath . $filename);
+            $img->resize(75,75)->save($thumbPath . $filename);
+    
+            $employee->photo = $imagePath . $filename;
+            $employee->thumb = $thumbPath . $filename;
+        }
+
         $employee->save();
         
         $request->session()->flash('message', 'Employee was updated!');

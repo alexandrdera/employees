@@ -6,6 +6,7 @@
 	<thead class="table-dark">
 		<tr>
 			<th>ID</th>
+			<th>Photo</th>
 			<th>Name</th>
 			<th>Last name</th>
 			<th>Patronomic</th>
@@ -20,6 +21,7 @@
 	<tbody>
 	    <tr>
 			<th scope="row">{{ $employee->id }}</th>
+			<td><img src={{ '/'.$employee->photo }}></td>
 			<td>{{ $employee->first_name }}</td>
 			<td>{{ $employee->last_name }}</td>
 			<td>{{ $employee->patronomic }}</td>

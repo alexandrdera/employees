@@ -3,7 +3,17 @@
 @section('content')
 
 	<!-- Форма создания сотрудника -->
-	{!! Form::open(['route' => 'employees.store', 'method' => 'POST']) !!}
+	{!! Form::open(['route' => 'employees.store', 'method' => 'POST', 'files' => true]) !!}
+
+		<!-- Загрузка фото сотрудника -->
+		<div class="form-row">
+			<div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }} col-md-4">
+				{!! Form::label('photo', 'Photo:'); !!}
+			    {!! Form::file('photo', ['class' => 'form-control ', 'id' => 'photo', 'name' => 'photo', 'type' => 'file']); !!}
+			</div>
+		</div>
+
+		<!-- ФИО -->
 		<div class="form-row">	
 			<div class="form-group col-md-4">
 			    {!! Form::label('first_name', 'First name:'); !!}
@@ -19,6 +29,7 @@
 			</div>
 		</div>
 
+		<!-- Непосредсвенный начальник и должность сотрудника -->
 		<div class="form-row">		
 			<div class="form-group col-md-8">
 			    {!! Form::label('parent_id', 'Chief:'); !!}
@@ -42,6 +53,7 @@
 			</div>
 		</div>
 
+		<!-- Дата трудоустройства -->
 		<div class="form-row">
 			<div class="form-group col-md-4">			
 				{!! Form::label('employment_date', 'Employment date:'); !!}
@@ -49,6 +61,7 @@
 			</div>
 		</div>
 
+		<!-- ЗП -->
 		<div class="form-row">
 			<div class="form-group col-md-4">			
 				{!! Form::label('salary', 'Salary:'); !!}
@@ -56,6 +69,7 @@
 			</div>
 		</div>
 
+		<!-- Кнопка -->
 		<div class="form-row">
 			<div class="form-group col-md-1">			
 				{!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
@@ -74,5 +88,12 @@
 	        </ul>
 	    </div>
 	@endif
+
+	<!-- Валидация фото -->
+	@if ($errors->has('photo'))
+    <span class="help-block">
+        <strong>{{ $errors->first('photo') }}</strong>
+    </span>
+@endif
 
 @endsection

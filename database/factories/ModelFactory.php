@@ -35,7 +35,10 @@ $factory->define(App\Employee::class, function (Faker\Generator $faker) {
         'patronomic' => $faker->firstName,
         'position' => $faker->jobTitle,
 		'employment_date' => date('Y-m-d'),
-        'salary' => random_int(5000, 10000)
+        'salary' => random_int(5000, 10000),
+        'photo' => 'upload/photo/template.jpg',
+        'thumb' => 'upload/thumb/template.jpg'
+
     ];
 });
 
