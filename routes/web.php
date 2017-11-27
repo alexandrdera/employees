@@ -29,4 +29,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Тест работы ajax
 Route::get('/getRequest', 'EmployeeController@getRequest');
-//Route::post('/employees/delete/', 'EmployeeController@delete_e');

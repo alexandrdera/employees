@@ -37,8 +37,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
  
-    <!-- //Тест работы ajax --> 
     <script type="text/javascript">
+  
+      <!-- //Тест работы ajax --> 
       $(document).ready(function(){
         $('#getRequest').click(function(e){
           e.preventDefault();
@@ -57,27 +58,29 @@
         });
 
         // После создания тега meta вы можете указать библиотеке, такой как jQuery, автоматически добавлять токен в заголовки всех запросов. Это обеспечивает простую, удобную CSRF-защиту для ваших приложений на базе AJAX:
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        // });
 
-        // Обработка кнопки Delete удаления сотрудника
-        $('.btn-danger').click(function(e){
-          e.preventDefault();
-          console.log($(this).attr("id"));
-          
+        // Обработка кнопки удаления сотрудника
+        $('.delete_employee').click(function(){
+
+          var btn = $(this);
+          var btn_id = btn.attr("id");
+
           $.ajax({
             type: "DELETE",
-            url: "/employees/"+$(this).attr("id"),
+            url: "/employees/"+btn_id,
             data: {
-              'id': $(this).attr("id"), 
+              'id': btn_id, 
               '_token': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data){
+              btn.closest('tr').remove(); //Удаляем строку из таблицы
               console.log(data);
-              $(this).append("test");
+              
             }
           });
         });

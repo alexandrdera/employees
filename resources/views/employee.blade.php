@@ -12,7 +12,7 @@
 		{!! Form::open(['route' => 'search_var', 'method' => 'GET']) !!}
 			<div class="form-group">
 				{!! Form::text('search_var', null, ['class' => '', 'placeholder' => 'Search']) !!}
-				{!! Form::submit('Search', ['class' => 'btn btn-outline-info btn-sm']) !!}
+				{!! Form::submit('Search', ['class' => 'btn btn-outline-secondary btn-sm']) !!}
 			</div>
 		{!! Form::close() !!}
 	</div>
@@ -49,12 +49,15 @@
 			<td>{{ $employee->chief_last_name }}</td>
 			<td>{{ $employee->chief_position }}</td>
 			<td>
-				<a href="/employees/{{ $employee->id }}">Read</a>
-				<a href="{{ URL::to('/employees/' . $employee->id) .'/edit' }}">Edit</a>
-				<form>
-
-					<button type="submit" class="btn btn-danger" id="{{$employee->id}}">Delete</button>
-				</form>
+				<a href="/employees/{{ $employee->id }}" class="btn btn-outline-secondary btn-sm">
+					<img src="/open-iconic/svg/person.svg" alt="person">
+				</a>
+				<a href="{{ URL::to('/employees/' . $employee->id) .'/edit' }}" class="btn btn-outline-secondary btn-sm">
+					<img src="/open-iconic/svg/pencil.svg" alt="pencil">
+				</a>
+				<button type="submit" class="btn btn-outline-secondary btn-sm delete_employee" id="{{$employee->id}}">
+					<img src="/open-iconic/svg/x.svg" alt="x">
+				</button>
 			</td>
 	    </tr>    			
 	@endforeach

@@ -222,28 +222,22 @@ class EmployeeController extends Controller
     public function destroy(Request $request, $id)
     {
         //
-        if ($id <> null){
+        if($request->ajax()) {
+            $employee = Employee::find($request->id);
+            $data = "сотрудник удален: ".$request->id;
+            $employee->delete();     
+            return response()->json( $data );            
+        } else {
             $employee = Employee::find($id);
             $employee->delete();        
             return redirect()->route('employees.index');            
-        } else {
-            $employee = Employee::find($request->id);
-            $employee->delete();     
-            $data = "сотрудник удален3: ".$request->id;
-            return response()->json( $data );            
-        }
+        } 
     }
 
+
+    //Тест работы ajax
     public function getRequest(Request $req){
-        //return "test";
         $data = "test2";
-        return response()->json( $data );
-    }
-
-    public function delete_e(Request $request){
-        $employee = Employee::find($request->id);
-        $employee->delete();     
-        $data = "сотрудник удален3: ".$request->id;
         return response()->json( $data );
     }
 }
