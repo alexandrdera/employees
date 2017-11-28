@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-ini_set('max_execution_time', 300); //Увеличиваем минимально разрешенное время выполнения php скрипта
+ini_set('max_execution_time', 900); //Увеличиваем минимально разрешенное время выполнения php скрипта
 
 class EmployeesTreeController extends Controller
 {
