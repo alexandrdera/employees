@@ -26,6 +26,13 @@ class CreateEmployeesTable extends Migration
             $table->string('thumb')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('employees', function (Blueprint $table) {
+            $table->foreign('parent_id')
+                    ->references('id')
+                    ->on('employees')
+                    ->onDelete('SET NULL');
+        });
     }
 
     /**
