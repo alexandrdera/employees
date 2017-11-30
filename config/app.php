@@ -168,11 +168,14 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
 
-        //Для запуска класса Form
+        // Для запуска класса Form
         Collective\Html\HtmlServiceProvider::class,
 
         // Для работы с изображениями
         Intervention\Image\ImageServiceProvider::class,
+
+        // Для работы DataTables
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -238,6 +241,9 @@ return [
 
         // Для работы с изображениями
         'Image' => Intervention\Image\Facades\Image::class,
+
+        // Для работы DataTables
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],
 

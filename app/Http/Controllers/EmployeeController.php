@@ -44,8 +44,10 @@ class EmployeeController extends Controller
                         'e2.position as chief_position'
                     )
             ->leftjoin('employees AS e2', 'e2.id', '=' , 'e.parent_id')
+            ->where('e.id', '<', '500')
             ->orderBy(''.$sort_by.'',''.$dir.'')
-            ->paginate(100);
+            //->paginate(100);
+            ->get();
         return view('employee', compact('employees'));
 
     }

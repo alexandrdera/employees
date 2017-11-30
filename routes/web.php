@@ -29,3 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Тест работы ajax
 Route::get('/getRequest', 'EmployeeController@getRequest');
+
+//Роуты для DataTables
+Route::get('datatables', 'DatatablesController@getIndex')->name('datatables'); 
+Route::get('datatables.data', 'DatatablesController@anyData')->name('datatables.data');
