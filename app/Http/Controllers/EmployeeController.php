@@ -165,7 +165,7 @@ class EmployeeController extends Controller
     {
         //
         $employee = Employee::find($id);
-
+        
         // Проверка на наличие начальника
         if ($employee->parent_id <> null){
             $chief = Employee::find($employee->parent_id);    

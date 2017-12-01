@@ -37,25 +37,25 @@ $(function() {
         serverSide: true,
         ajax: '{!! route('datatables.data') !!}',
         columns: [
-            { data: 'id', name: 'id' },
+            { data: 'id', name: 'employees.id' },
             { 
             	data: 'thumb', 
-            	name: 'thumb',
+            	name: 'employees.thumb',
         	    render: function ( data, type, row, meta ) {
 			      return '<img src="'+data+'">';
 			    },
 			    searchable: false,
 			    orderable: false
             },
-            { data: 'first_name', name: 'first_name' },
-            { data: 'last_name', name: 'last_name' },
-            { data: 'patronomic', name: 'patronomic' },
-            { data: 'position', name: 'position' },
-            { data: 'employment_date', name: 'employment_date' },
-            { data: 'salary', name: 'salary' },
-            { data: null, name: 'chief_name', searchable: false },
-            { data: null, name: 'chief_last_name', searchable: false },
-            { data: null, name: 'chief_position', searchable: false },
+            { data: 'first_name', name: 'employees.first_name' },
+            { data: 'last_name', name: 'employees.last_name' },
+            { data: 'patronomic', name: 'employees.patronomic' },
+            { data: 'position', name: 'employees.position' },
+            { data: 'employment_date', name: 'employees.employment_date' },
+            { data: 'salary', name: 'employees.salary' },
+            { data: 'chief_name', name: 'e2.first_name', searchable: false },
+            { data: 'chief_last_name', name: 'e2.last_name', searchable: false },
+            { data: 'chief_position', name: 'e2.position', searchable: false },
 
             //Вывод кнопок в колонке Action
             { 
