@@ -19,10 +19,6 @@ Route::get('/employees_tree', 'EmployeesTreeController@index');
 
 Route::resource('/employees', 'EmployeeController');
 
-Route::get('employees/search/search', ['as' => 'search_var', 'uses' => 'EmployeeController@search']);
-
-Route::get('/employees/order_by/{sort_by}', 'EmployeeController@index');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -31,5 +27,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/getRequest', 'EmployeeController@getRequest');
 
 //Роуты для DataTables
-Route::get('datatables', 'DatatablesController@getIndex')->name('datatables'); 
+Route::get('/employees', 'DatatablesController@getIndex')->name('datatables'); 
 Route::get('datatables.data', 'DatatablesController@anyData')->name('datatables.data');

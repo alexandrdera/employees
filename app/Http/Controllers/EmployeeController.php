@@ -21,74 +21,6 @@ class EmployeeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request, $sort_by=null)
-    { 
-        $dir = 'asc';
-
-        if (is_null($sort_by)){
-            $sort_by = 'id';
-        } 
-        
-        $employees = DB::table('employees AS e')
-            ->select(
-                        'e.id',
-                        'e.position',
-                        'e.first_name',
-                        'e.last_name',
-                        'e.patronomic',
-                        'e.employment_date',
-                        'e.salary',
-                        'e.thumb',
-                        'e2.first_name as chief_name',
-                        'e2.last_name as chief_last_name',
-                        'e2.position as chief_position'
-                    )
-            ->leftjoin('employees AS e2', 'e2.id', '=' , 'e.parent_id')
-            ->where('e.id', '<', '500')
-            ->orderBy(''.$sort_by.'',''.$dir.'')
-            //->paginate(100);
-            ->get();
-        return view('employee', compact('employees'));
-
-    }
-
-    public function search()
-    {
-
-        $search = Input::get('search_var');
-
-        if (is_null($search)) {
-            return redirect('/employees');
-        } else { 
-            $employees = DB::table('employees AS e')
-                ->select(
-                            'e.id',
-                            'e.position',
-                            'e.first_name',
-                            'e.last_name',
-                            'e.patronomic',
-                            'e.employment_date',
-                            'e.salary',
-                            'e2.first_name as chief_name',
-                            'e2.last_name as chief_last_name',
-                            'e2.position as chief_position'
-                        )
-                ->leftjoin('employees AS e2', 'e2.id', '=' , 'e.parent_id')
-                ->where('e.id', '=', ''.$search.'')
-                ->orwhere('e.position', '=', ''.$search.'')
-                ->orwhere('e.first_name', '=', ''.$search.'')
-                ->orwhere('e.last_name', '=', ''.$search.'')
-                ->orwhere('e.patronomic', '=', ''.$search.'')
-                ->orwhere('e.employment_date', '=', ''.$search.'')
-                ->orwhere('e.salary', '=', ''.$search.'')
-                ->orwhere('e2.first_name', '=', ''.$search.'')
-                ->orwhere('e2.last_name', '=', ''.$search.'')
-                ->orwhere('e2.position', '=', ''.$search.'')
-                ->paginate(100);
-    
-            return view('employee', compact('employees'));        
-        }
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -165,7 +97,7 @@ class EmployeeController extends Controller
     {
         //
         $employee = Employee::find($id);
-        
+
         // Проверка на наличие начальника
         if ($employee->parent_id <> null){
             $chief = Employee::find($employee->parent_id);    

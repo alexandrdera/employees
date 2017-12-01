@@ -17,7 +17,7 @@
 			<th>Last name</th>
 			<th>Patronomic</th>
 			<th>Position</th>
-			<th>Employment date</th>
+			<th>Empl-nt date</th>
 			<th>Salary</th>
 			<th>Chief name</th>
 			<th>Chief last name</th>
@@ -32,6 +32,8 @@
 @push('scripts')
 <script>
 $(function() {
+	
+	//Обработка таблицы сотрудников средствами DataTables
     $('#employees-table').DataTable({
         processing: true,
         serverSide: true,

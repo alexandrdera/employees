@@ -9,6 +9,12 @@ use DB;
 
 class DatatablesController extends Controller
 {
+	// Ограничениен доступа для не аутентифицированных пользователей
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Displays datatables front end view
      *
