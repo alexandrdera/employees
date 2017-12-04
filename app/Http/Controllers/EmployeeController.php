@@ -42,7 +42,7 @@ class EmployeeController extends Controller
     {
         //
          $this->validate($request, [
-            'parent_id' => 'required',
+            //'parent_id' => 'required',
             'position' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
@@ -142,7 +142,7 @@ class EmployeeController extends Controller
     {
         //
         $this->validate($request, [
-            'parent_id' => 'required',
+            //'parent_id' => 'required',
             'position' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
@@ -198,13 +198,15 @@ class EmployeeController extends Controller
         //
         if($request->ajax()) {
             $employee = Employee::find($request->id);
+            DB::table('employees')->where('parent_id', $id)->update(['parent_id' => $employee->parent_id]); //переподчиняем
             $data = "сотрудник удален: ".$request->id;
             $employee->delete();     
             return response()->json( $data );            
         } else {
             $employee = Employee::find($id);
+            DB::table('employees')->where('parent_id', $id)->update(['parent_id' => $employee->parent_id]); //переподчиняем
             $employee->delete();        
-            return redirect()->route('employees.index');            
+            return redirect()->route('datatables');            
         } 
     }
 
