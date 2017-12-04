@@ -153,8 +153,8 @@ class EmployeeController extends Controller
 
         ]);
 
-        // Создание сотрудника
-        $employee = new Employee();
+        // Внесение изменений для сотрудника
+        $employee = Employee::find($id);
         $employee->parent_id = $request->parent_id;
         $employee->position = $request->position;
         $employee->first_name = $request->first_name;
