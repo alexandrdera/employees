@@ -1,0 +1,22 @@
+{
+  "name": "employees",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Alexandr Derachic <alexandr.dera@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/alexandrdera/employees",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "datatables": "^1.10.16",
+    "jquery-ui": "^1.12.1"
+  }
+}
