@@ -54,35 +54,5 @@
   <!-- App scripts -->
   @stack('scripts') 
 
-  <script type="text/javascript">
-  
-    <!-- //Тест работы ajax --> 
-    $(document).ready(function(){
-      $('#getRequest').click(function(e){
-        e.preventDefault();
-        // $.get('getRequest', function(data){
-        //   $('#getRequestData').append(data);
-        //   console.log(data);
-        // });
-        $.ajax({
-          type: "GET",
-          url: "getRequest",
-          success: function(data){
-            console.log(data);
-            $('#getRequestData').append("test");
-          }
-        });
-      });
-
-      // После создания тега meta вы можете указать библиотеке, такой как jQuery, автоматически добавлять токен в заголовки всех запросов. Это обеспечивает простую, удобную CSRF-защиту для ваших приложений на базе AJAX:
-      // $.ajaxSetup({
-      //     headers: {
-      //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      //     }
-      // });
-
-    });
-  </script>
-
 </body>
 </html>

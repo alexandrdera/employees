@@ -209,11 +209,4 @@ class EmployeeController extends Controller
             return redirect()->route('datatables');            
         } 
     }
-
-
-    //Тест работы ajax
-    public function getRequest(Request $req){
-        $data = "test2";
-        return response()->json( $data );
-    }
 }
