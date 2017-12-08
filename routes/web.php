@@ -31,3 +31,4 @@ Route::get('/employees', 'DatatablesController@getIndex')->name('datatables');
 Route::get('datatables.data', 'DatatablesController@anyData')->name('datatables.data');
 
 Route::put('change.chief', 'EmployeesTreeController@changeChief')->name('change.chief');
+Route::post('get.subemployees', 'EmployeesTreeController@getSubEmployees')->name('get.subemployees');

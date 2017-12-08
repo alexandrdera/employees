@@ -15,7 +15,7 @@ function EmployeesTree($array, $parent_id, $level) {
 
         if ($employee->parent_id == $parent_id) {
             
-            echo '<li employee_id='.$employee->id.'> <b>'.$employee->position.'</b> - '.$employee->first_name.' '.$employee->last_name.', $'.round($employee->salary,-2);
+            echo '<li employee_id='.$employee->id.' class="employee"> <b>'.$employee->position.'</b> - '.$employee->first_name.' '.$employee->last_name.', $'.round($employee->salary,-2);
             $level++;
             echo '<ul id="sortable">';
 
@@ -54,6 +54,41 @@ $( function() {
     });
     
     $( "#sortable" ).disableSelection();
+
+    // Обработка 'ленивой загрузки' дерева
+    $("li").on( "click", ".employee", function(){
+
+        var li = $(this);
+        var chief_id = li.attr("employee_id");
+        console.log('ok', chief_id);
+
+        $.ajax({
+            type: "POST",
+            url: "get.subemployees",
+            data: {
+                'chief_id': chief_id, 
+                '_token': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+                console.log(data);
+
+                $.each(data,function(key, value){
+                    //рисуем подчиненных сотрудников
+                    var newLi = document.createElement('li');
+                    $.each(value, function(){
+                        
+                        var subemployee = '<b>'+value['position']+'</b> - '+value['first_name']+' '+value['last_name']+', $'+value['salary']+'<ul id="sortable"></ul>';
+                        console.log(subemployee);
+                        
+                        newLi.innerHTML = subemployee;
+                        $(newLi).attr({"employee_id":value['id'], "class":"employee ui-sortable-handle"});
+                        li.children('ul').append(newLi);
+                    });
+                });
+            }
+        });
+    });
+
 });
 
 </script>

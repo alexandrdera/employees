@@ -36,4 +36,12 @@ class EmployeesTreeController extends Controller
         DB::table('employees')->where('id', $request->employee_id)->update(['parent_id' => $request->chief_id]); //переподчиняем
         return response()->json('ok');
     }
+
+    // Возвращаем подчиненных начальника
+    public function getSubEmployees(Request $request){
+        $subemployees = DB::table('employees')
+            ->select('id', 'position', 'first_name', 'last_name', 'salary')
+            ->where('parent_id', $request->chief_id)->get();
+        return response()->json($subemployees);
+    }
 }
