@@ -56,8 +56,9 @@ $( function() {
     $( "#sortable" ).disableSelection();
 
     // Обработка 'ленивой загрузки' дерева
-    $("li").on( "click", ".employee", function(){
-
+    $("li").on( "click", ".employee", function(event){
+        event.stopPropagation();
+        
         var li = $(this);
         var chief_id = li.attr("employee_id");
         console.log('ok', chief_id);
