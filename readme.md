@@ -1,5 +1,8 @@
-![Logo](https://alexandr-dera-laravel.000webhostapp.com/upload/thumb/template.jpg "Employees logo") 
 ## Описание проекта Employees
+
+![Logo](https://alexandr-dera-laravel.000webhostapp.com/upload/thumb/template.jpg "Employees logo") 
+[]()
+
 Этот проект представляет собой онлайн каталог сотрудников реализованный на основе фреймворка Laravel. Приложение размещено на тестовом хостинге [https://alexandr-dera-laravel.000webhostapp.com](https://alexandr-dera-laravel.000webhostapp.com).
 
 Весь функционал сосредоточен на двух страницах:
